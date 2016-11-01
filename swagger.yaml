@@ -11,26 +11,28 @@ paths:
     get:
       tags:
         - Careers
-      description: "Get all `job` objects. Can be filtered by parameters."
+      description: "Get all `job` objects sorted by expiration date. Can be filtered by parameters."
       operationId: getJobs
       produces:
         - application/json
       parameters:
         - name: location
+          description: "Filter by city/state (full-text search); e.g. corvallis, OR, etc."
           in: query
           required: false
           type: string
-          description: "Filter by city/state; e.g. corvallis, OR"
         - name: positionType
+          description: "Filter by position type (full-text search); e.g. full-time"
           in: query
           required: false
           type: string
-          description: "Filter by position type; e.g. full-time"
         - name: positionTitle
+          description: "Filter by position title (full-text search)"
           in: query
           required: false
           type: string
         - name: employer
+          description: "Filter by employer (full-text search)"
           in: query
           required: false
           type: string
@@ -38,6 +40,12 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: days
+          description: "Days left to expire"
+          in: query
+          required: false
+          type: integer
+          format: int32
         - name: page[size]
           description: "Number of results to return. Used in pagination. Default value is 10."
           in: query
@@ -122,25 +130,24 @@ definitions:
   Attributes:
     type: object
     properties:
-      OrganizationName:
+      organizationName:
         type: string
         description: "Name of the employer"
-      PositionTitle:
+      positionTitle:
         type: string
-      HowtoApply:
+      howtoApply:
         type: string
-      PositionLocation:
+      positionLocation:
         type: string
         description: "(City, State)"
-      PositionFunction:
+      positionFunction:
         type: string
-      PositionType:
+      positionType:
         type: string
         description: "Full-time/Part-time/Internship - Paid"
-      ExpirationDate:
+      expirationDate:
         type: string
-        format: date
-      JobLink:
+      jobLink:
         type: string
 
   Links:
